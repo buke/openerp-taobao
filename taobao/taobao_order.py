@@ -287,7 +287,7 @@ class sale_order(osv.osv, TaobaoMixin):
             picking_ids = map(lambda x: x.id, sale_order_instance.picking_ids)
             min_date = datetime.datetime.utcnow() + datetime.timedelta(days = 30)
             max_date = datetime.datetime.utcnow() + datetime.timedelta(days = 30)
-            pool.get('sale.order').write(cr, uid, picking_ids, {'min_date': min_date.strftime('%Y-%m-%d %H:%M:%S'), 'max_date': max_date.strftime('%Y-%m-%d %H:%M:%S')})
+            pool.get('stock.picking').write(cr, uid, picking_ids, {'min_date': min_date.strftime('%Y-%m-%d %H:%M:%S'), 'max_date': max_date.strftime('%Y-%m-%d %H:%M:%S')})
 
             for picking_id in picking_ids:
                 wf_service.trg_validate(uid, "stock.picking", picking_id, 'button_confirm', cr)
