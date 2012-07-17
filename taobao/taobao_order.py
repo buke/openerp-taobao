@@ -25,7 +25,6 @@
 ##############################################################################
 
 from osv import osv, fields
-import datetime
 import time
 import netsvc
 from .taobao_top import TOP
@@ -249,6 +248,7 @@ class sale_order(osv.osv, TaobaoMixin):
             vals['taobao_order_id'] = order.oid
             vals['product_uom_qty'] = int(order.num)
             vals['price_unit'] = float(order.total_fee) / float(order.num)
+            vals['delay'] = 30.0
             sale_order_line_obj._save(cr, uid, args=[('taobao_order_id','=', order.oid)], **vals)
 
         #保存邮费
@@ -285,9 +285,6 @@ class sale_order(osv.osv, TaobaoMixin):
             wf_service.trg_validate(uid, "sale.order", sale_id, 'order_confirm', cr)
 
             picking_ids = map(lambda x: x.id, sale_order_instance.picking_ids)
-            min_date = datetime.datetime.utcnow() + datetime.timedelta(days = 30)
-            max_date = datetime.datetime.utcnow() + datetime.timedelta(days = 30)
-            pool.get('stock.picking').write(cr, uid, picking_ids, {'min_date': min_date.strftime('%Y-%m-%d %H:%M:%S'), 'max_date': max_date.strftime('%Y-%m-%d %H:%M:%S')})
 
             for picking_id in picking_ids:
                 wf_service.trg_validate(uid, "stock.picking", picking_id, 'button_confirm', cr)
