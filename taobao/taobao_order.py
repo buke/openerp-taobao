@@ -25,6 +25,7 @@
 ##############################################################################
 
 from osv import osv, fields
+import datetime
 import time
 import netsvc
 from .taobao_top import TOP
@@ -284,6 +285,10 @@ class sale_order(osv.osv, TaobaoMixin):
             wf_service.trg_validate(uid, "sale.order", sale_id, 'order_confirm', cr)
 
             picking_ids = map(lambda x: x.id, sale_order_instance.picking_ids)
+            min_date = datetime.datetime.utcnow() + datetime.timedelta(years = 1)
+            max_date = datetime.datetime.utcnow() + datetime.timedelta(years = 1)
+            pool.get('sale.order').write(cr, uid, picking_ids, {'min_date': min_date.strftime('%Y-%m-%d %H:%M:%S'), 'max_date': max_date.strftime('%Y-%m-%d %H:%M:%S')})
+
             for picking_id in picking_ids:
                 wf_service.trg_validate(uid, "stock.picking", picking_id, 'button_confirm', cr)
 
