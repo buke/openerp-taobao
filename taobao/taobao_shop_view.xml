@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!--update mrp scheduler-->
+        <record id="procurement.ir_cron_scheduler_action" model="ir.cron">
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field eval="True" name="active"/>
+        </record>
+
+        <!--update Email Queue Manager-->
+        <record id="mail.ir_cron_mail_scheduler_action" model="ir.cron">
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+        </record>
+
+        <!--Disable Auto-email confirmed purchase orders-->
+        <record id="purchase.ir_actions_server_edi_purchase" model="ir.actions.server">
+            <field name="condition">False</field>
+        </record>
+
+        <!--Disable Auto-email confirmed sale orders-->
+        <record id="sale.ir_actions_server_edi_sale" model="ir.actions.server">
+            <field name="condition">False</field>
+        </record>
+
+        <!--Disable Auto-email confirmed invoices-->
+        <record id="account.ir_actions_server_edi_invoice" model="ir.actions.server">
+            <field name="condition">False</field>
+        </record>
+
+
+
+        <!--taobao shop view-->
+        <record id="view_taobao_shop_form" model="ir.ui.view">
+            <field name="name">taobao.shop</field>
+            <field name="model">taobao.shop</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sales Shop">
+                    <field name="name" select="1"/>
+                    <field name="sale_shop_id" select="1"/>
+                    <field name="taobao_nick" select="1" readonly="1"/>
+                    <field name="taobao_shop_url" readonly="1" widget="url"/>
+           
+                    <notebook colspan="4">
+                        <page string="Basic">
+                           <field name="taobao_app_key" select="1"/>
+                            <field name="taobao_app_secret"/>
+                            <field name="taobao_session_key"/>
+                            <newline />
+                            <field name="enable_taobao_stream"/>
+                        </page>
+                    </notebook>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="view_taobao_shop_tree" model="ir.ui.view">
+            <field name="name">taobao.shop</field>
+            <field name="model">taobao.shop</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sales Shop">
+                    <field name="name"/>
+                    <field name="sale_shop_id"/>
+                    <field name="taobao_nick"/>
+                    <field name="taobao_app_key"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_taobao_shop_form" model="ir.actions.act_window">
+            <field name="name">Taobao Shop</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">taobao.shop</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_taobao_shop_tree"/>
+        </record>
+
+        <!--taobao menu-->
+        <menuitem id="taobao_menu" name="Taobao" parent="base.menu_base_config" sequence="0" groups="base.group_sale_manager"/>
+
+        <!--taobao shop menu-->
+        <menuitem action="action_taobao_shop_form" id="menu_action_taobao_shop_form" parent="taobao_menu" sequence="0"/>
+
+        <!--cron-->
+        <record id="ir_cron_taobao_stream_action" model="ir.cron">
+            <field name="name">Taobao Stream Service</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">taobao.shop</field>
+            <field name="function">stream</field>
+            <field name="args">()</field>
+        </record>
+
+    </data>
+</openerp>
+

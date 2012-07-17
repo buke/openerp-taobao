@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+         <!-- Create a transporter -->
+
+        <record id="taobao_delivery_partner" model="res.partner">
+            <field name="name">快递</field>
+        </record>
+        <record id="delivery_partner_address" model="res.partner.address">
+            <field name="type">default</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+        </record>
+
+        <!-- Create a service product -->
+
+        <record id="taobao_delivery_product" model="product.product">
+            <field name="name">运费</field>
+            <field name="default_code">post_fee</field>
+            <field name="type">service</field>
+            <!--<field name="categ_id" ref="product.product_category_services"/>-->
+        </record>
+
+        <!-- Carrier -->
+
+        <record id="delivery_carrier_yto" model="delivery.carrier">
+            <field name="name">圆通速递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_sto" model="delivery.carrier">
+            <field name="name">申通E物流</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_yunda" model="delivery.carrier">
+            <field name="name">韵达快运</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_zto" model="delivery.carrier">
+            <field name="name">中通速递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_sf" model="delivery.carrier">
+            <field name="name">顺丰速运</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_ems" model="delivery.carrier">
+            <field name="name">EMS</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_lianhaotong" model="delivery.carrier">
+            <field name="name">联昊通</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_quanfeng" model="delivery.carrier">
+            <field name="name">全峰快递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_quanyi" model="delivery.carrier">
+            <field name="name">全一快递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_zjs" model="delivery.carrier">
+            <field name="name">宅急送</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+        
+        <record id="delivery_carrier_tiantian" model="delivery.carrier">
+            <field name="name">海航天天快递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_lianbang" model="delivery.carrier">
+            <field name="name">联邦快递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_huitong" model="delivery.carrier">
+            <field name="name">汇通快运</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_debang" model="delivery.carrier">
+            <field name="name">德邦物流</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_baishi" model="delivery.carrier">
+            <field name="name">百世物流</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_zhongtie" model="delivery.carrier">
+            <field name="name">中铁快运</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_yibang" model="delivery.carrier">
+            <field name="name">一邦(CCES)</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_cces" model="delivery.carrier">
+            <field name="name">CCES</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_longbang" model="delivery.carrier">
+            <field name="name">龙邦物流</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_xinbang" model="delivery.carrier">
+            <field name="name">新邦物流</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_heimao" model="delivery.carrier">
+            <field name="name">黑猫宅急便</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_nengda" model="delivery.carrier">
+            <field name="name">港中能达</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_kuaijie" model="delivery.carrier">
+            <field name="name">快捷速递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_yousu" model="delivery.carrier">
+            <field name="name">优速物流</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_quanritong" model="delivery.carrier">
+            <field name="name">全日通快递</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_post" model="delivery.carrier">
+            <field name="name">邮政平邮</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+        <record id="delivery_carrier_other" model="delivery.carrier">
+            <field name="name">其他</field>
+            <field name="normal_price">10</field>
+            <field name="free_if_more_than">True</field>
+            <field name="amount">1000</field>
+            <field name="partner_id" ref="taobao_delivery_partner"/>
+            <field name="product_id" ref="taobao_delivery_product"/>
+        </record>
+
+
+   </data>
+</openerp>

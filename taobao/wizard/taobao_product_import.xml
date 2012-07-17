@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_taobao_product_search" model="ir.ui.view">
+            <field name="name">Taobao Product Search</field>
+            <field name="model">taobao.product.search</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Taobao Product Search">
+                    <field name="taobao_shop_id"/>
+                    <newline />
+                    <field name="taobao_search_q"/>
+                    <newline />
+                    <separator string="" colspan="4"/>
+                    <label string=""  colspan="2" />
+                    <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                    <button name="search_product" string="Search Product" type="object" icon="gtk-go-forward"/>
+                </form>
+            </field>
+        </record>
+
+        <act_window 
+            name="导入淘宝商品"
+            res_model="taobao.product.search"
+            src_model="taobao.shop"
+            view_mode="form"
+            target="new"
+            id="action_view_taobao_product_search"/>
+
+        <act_window 
+            name="导入淘宝商品"
+            res_model="taobao.product.search"
+            src_model="product.product"
+            view_mode="form"
+            target="new"
+            id="action_view_product_product_search"/>
+
+
+
+        <record id="taobao_product_import_line_tree_in" model="ir.ui.view">
+            <field name="name">taobao.product.import.line.tree</field>
+            <field name="model">taobao.product.import.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Taobao Products">
+                    <field name="taobao_item_num_iid" />
+                    <field name="taobao_item_title"  readonly="1" />
+                    <field name="taobao_item_pic_url" widget="url" readonly="1" />
+                    <field name="taobao_item_price" readonly="1" />
+                    <field name="taobao_item_volume" readonly="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_taobao_product_import" model="ir.ui.view">
+            <field name="name">Taobao Product Import</field>
+            <field name="model">taobao.product.import</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Products">
+                    <field name="taobao_product_category_id"/>
+                    <field name="taobao_product_supplier"/>
+                    <field name="taobao_product_warehouse_id"/>
+                    <field name="taobao_product_location_id"/>
+                    <field name="taobao_product_cost_method"/>
+                    <field name="taobao_product_type"/>
+                    <field name="taobao_product_supply_method"/>
+                    <field name="taobao_product_procure_method"/>
+                    <field name="taobao_product_min_qty"/>
+                    <field name="taobao_product_max_qty"/>
+                    <field name="taobao_product_uom"/>
+
+                    <field name="is_update_stock" />
+                    <field name="product_import_lines" colspan="4" nolabel='1'/>
+                    <newline />
+                    <separator string="" colspan="4"/>
+                    <label string=""  colspan="2" />
+                    <group colspan="4">
+                        <button special="cancel" string="Close" icon="gtk-cancel"/>
+                        <button name="import_product" string="Import Product" type="object" icon="gtk-go-forward"/>
+                    </group>
+                 </form>
+            </field>
+        </record>
+
+        <record id="action_view_taobao_product_import" model="ir.actions.act_window">
+            <field name="name">Taobao Product Import</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">taobao.product.import</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

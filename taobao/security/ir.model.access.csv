@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_taobao_product,taobao.product,model_taobao_product,base.group_sale_salesman,1,1,1,1
+access_taobao_rate,taobao.rate,model_taobao_rate,base.group_sale_salesman,1,1,1,1
+access_taobao_shop,taobao.shop,model_taobao_shop,base.group_sale_salesman,1,1,1,1
+access_taobao_packet,taobao.packet,model_taobao_packet,base.group_sale_salesman,1,1,1,1
+access_taobao_refund,taobao.refund,model_taobao_refund,base.group_sale_salesman,1,1,1,1
+

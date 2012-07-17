@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="res_bank_alipay" model="res.bank">
+            <field name="name">支付宝</field>
+            <field name="bic">alipay</field>
+        </record>
+
+        <record id="bank_alipay" model="res.partner.bank.type">
+            <field name="name">支付宝</field>
+            <field name="code">alipay</field>
+        </record>
+
+        <record id="bank_alipay_field_account_name" model="res.partner.bank.type.field">
+            <field name="name">帐号</field>
+            <field name="bank_type_id" ref="bank_alipay"/>
+            <field name="required" eval="0"/>
+        </record>
+
+   </data>
+</openerp>

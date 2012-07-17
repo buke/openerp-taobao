@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="taobao_shop_user_view_form" model="ir.ui.view">
+            <field name="name">taobao_shop_user_view_form</field>
+            <field name="model">taobao.shop</field>
+            <field name="inherit_id" ref="taobao.view_taobao_shop_form" />
+            <field name="arch" type="xml">
+                <page string="Basic" position="after">
+                    <page string="User">
+                        <field name="taobao_user_category_id"/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+
+        <!-- res.partner form 视图-->
+        <record id="taobao_user_view_partner_form" model="ir.ui.view">
+            <field name="name">taobao_user_view_partner_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="lang" position="after">
+                    <field name="taobao_nick" select="1" readonly="1"/>
+                    <field name="taobao_user_profile" readonly="1" colspan="4" widget="url"/>
+
+                    <field name="taobao_receive_sms_remind"/>
+                    <field name="taobao_receive_email_remind"/>
+ 
+                </field>
+            </field>
+        </record>
+
+        <record id="taobao_user_view_partner_tree" model="ir.ui.view">
+            <field name="name">taobao_user_view_partner_tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="arch" type="xml">
+                <field name="name"  position="after">
+                    <field name="taobao_nick"/>
+                </field>
+                <field name="phone"  position="after">
+                    <field name="mobile"/>
+                </field>
+                <field name="city"  position="after">
+                    <field name="state"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="taobao_search_user_view_partner_tree" model="ir.ui.view">
+            <field name="name">taobao_search_user_view_partner_tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter" />
+            <field name="arch" type="xml">
+                <field name="address"  position="after">
+                    <field name="mobile"/>
+                    <field name="city"/>
+                    <field name="state"/>
+                </field>
+            </field>
+        </record>
+
+
+
+
+    </data>
+</openerp>
+

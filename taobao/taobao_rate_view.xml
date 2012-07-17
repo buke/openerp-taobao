@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="taobao_shop_rate_view_form" model="ir.ui.view">
+            <field name="name">taobao_shop_rate_view_form</field>
+            <field name="model">taobao.shop</field>
+            <field name="inherit_id" ref="taobao.view_taobao_shop_form" />
+            <field name="arch" type="xml">
+                <page string="Basic" position="after">
+                    <page string="Rate">
+                        <field name="enable_auto_check_rate"/>
+                        <newline />
+                        <field name="rate_helpdesk_user_id"/>
+                        <field name="rate_helpdesk_section_id"/>
+                        <field name="rate_helpdesk_channel_id"/>
+                        <field name="rate_helpdesk_priority"/>
+                        <field name="rate_helpdesk_categ_id"/>
+                        <field name="rate_remind_user"/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="ir_cron_taobao_check_rate_action" model="ir.cron">
+            <field name="name">Taobao Check Rate</field>
+            <field name="interval_number">3</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">taobao.rate</field>
+            <field name="function">cron_check_rate</field>
+            <field name="args">()</field>
+        </record>
+
+    </data>
+</openerp>

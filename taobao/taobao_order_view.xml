@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="taobao_shop_order_view_form" model="ir.ui.view">
+            <field name="name">taobao_shop_order_view_form</field>
+            <field name="model">taobao.shop</field>
+            <field name="inherit_id" ref="taobao.view_taobao_shop_form" />
+            <field name="arch" type="xml">
+                <page string="Basic" position="after">
+                    <page string="Order">
+                        <field name="taobao_journal_id"
+                                domain="[('type','in',['bank', 'cash'])]"
+                                widget="selection" select="1"
+                                string="Payment Method"/>
+                        <separator colspan="4" string="评价"/>
+                        <field name="enable_auto_rate"/>
+                        <newline />
+                        <field name="taobao_rate_content"/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_taobao_trade_sale_order_form">
+            <field name="name">view_taobao_trade_sale_order_form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <field name="client_order_ref" position="after">
+                    <field name="taobao_trade_id" select="1" readonly="1" />
+                    <field name="taobao_alipay_no" select="1" readonly="1" />
+                    <field name="taobao_trade_url" readonly="1" colspan="4" widget="url" />
+                    <field name="taobao_trade_status"  select="1" readonly="1"  />
+                    <field name="taobao_pay_time" readonly="1"  />
+                    <newline />
+                    <field name="taobao_buyer_message"  readonly="1"  />
+                    <field name="taobao_seller_memo"  readonly="1"  />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_picking_withcarrier_in_form" model="ir.ui.view">
+            <field name="name">delivery.stock.picking_withcarrier.in.form.view</field>
+            <field name="type">form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_in_form"/>
+            <field name="arch" type="xml">
+                <field name="address_id" position="after">
+                    <field name="carrier_id"/>
+                    <field name="carrier_tracking_ref" groups="base.group_extended"/>
+                    <field name="number_of_packages" groups="base.group_extended"/>
+                    <field name="weight"/>
+                    <field name="weight_net"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_picking_withcarrier_tree" model="ir.ui.view">
+            <field name="name">view_picking_withcarrier_tree</field>
+            <field name="type">tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="carrier_id"/>
+                    <field name="carrier_tracking_ref" groups="base.group_extended"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_view_picking_out_withcarrier_tree" model="ir.ui.view">
+            <field name="name">view_view_picking_out_withcarrier_tree</field>
+            <field name="type">tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_out_tree"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="carrier_id"/>
+                    <field name="carrier_tracking_ref" groups="base.group_extended"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+

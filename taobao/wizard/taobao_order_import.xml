@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="taobao_order_import_line_tree_in" model="ir.ui.view">
+            <field name="name">taobao.order.import.line.tree</field>
+            <field name="model">taobao.order.import.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Taobao Orders">
+                    <field name="tid" />
+                    <field name="taobao_shop_id" />
+                    <field name="status" readonly="1"/>
+                    <field name="buyer_nick" readonly="1"/>
+                    <field name="total_fee" readonly="1"/>
+                    <field name="pay_time" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_taobao_order_import" model="ir.ui.view">
+            <field name="name">Taobao Order Import</field>
+            <field name="model">taobao.order.import</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Orders">
+                    <field name="taobao_shop_id" />
+                    <field name="order_time" />
+                    <separator colspan="4" string="Order Status"/>
+                    <field name="TRADE_NO_CREATE_PAY" />
+                    <field name="WAIT_BUYER_PAY" />
+                    <field name="WAIT_SELLER_SEND_GOODS" />
+                    <field name="WAIT_BUYER_CONFIRM_GOODS" />
+                    <field name="TRADE_BUYER_SIGNED" />
+                    <field name="TRADE_FINISHED" />
+                    <field name="TRADE_CLOSED" />
+                    <field name="TRADE_CLOSED_BY_TAOBAO" />
+                    <newline />
+                    <button name="search_order" string="Search Order" type="object" icon="gtk-go-forward"/>
+                    <newline />
+                    <field name="order_import_lines" colspan="4" nolabel='1'/>
+                    <separator string="" colspan="4"/>
+                    <label string=""  colspan="2" />
+                    <group colspan="4">
+                        <button special="cancel" string="Close" icon="gtk-cancel"/>
+                        <button name="import_order" string="Import Order" type="object" icon="gtk-go-forward"/>
+                    </group>
+                 </form>
+            </field>
+        </record>
+
+        <act_window 
+            name="导入淘宝订单"
+            res_model="taobao.order.import"
+            src_model="taobao.shop"
+            view_mode="form"
+            target="new"
+            id="action_view_taobao_order_import"/>
+
+        <act_window 
+            name="导入淘宝订单"
+            res_model="taobao.order.import"
+            src_model="sale.order"
+            view_mode="form"
+            target="new"
+            id="action_view_sale_order_import"/>
+
+
+
+
+    </data>
+</openerp>

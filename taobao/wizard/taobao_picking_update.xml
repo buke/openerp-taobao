@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="taobao_picking_update_line_tree_in" model="ir.ui.view">
+            <field name="name">taobao.picking.update.line.tree</field>
+            <field name="model">taobao.picking.update.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Taobao Products">
+                    <field name="product_product_id" />
+                    <field name="qty" />
+                    <field name="update_type" />
+                    <field name="taobao_shop_id" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_taobao_picking_update" model="ir.ui.view">
+            <field name="name">Taobao Picking Stock Update</field>
+            <field name="model">taobao.picking.update</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Lines">
+                    <field name="stock_update_lines" colspan="4" nolabel='1'/>
+                    <separator string="" colspan="4"/>
+                    <label string=""  colspan="2" />
+                    <group colspan="4">
+                        <button special="cancel" string="Close" icon="gtk-cancel"/>
+                        <button name="update_stock" string="Update Stock" type="object" icon="gtk-go-forward"/>
+                    </group>
+                 </form>
+            </field>
+        </record>
+
+        <record id="action_taobao_picking_update" model="ir.actions.act_window">
+            <field name="name">Process Picking</field>
+            <field name="res_model">taobao.picking.update</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <record id="view_taobao_update_picking_in_form" model="ir.ui.view">
+            <field name="name">view.taobao.update.picking.in.form.view</field>
+            <field name="type">form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_in_form"/>
+            <field name="arch" type="xml">
+
+                <button name="action_process" position="before">
+                    <button name="%(action_taobao_picking_update)d" string="更新淘宝库存" states="done" type="action" icon="gtk-execute"/>
+                </button>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

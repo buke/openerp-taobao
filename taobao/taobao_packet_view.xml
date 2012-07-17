@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="ir_cron_flush_taobao_packet_action" model="ir.cron">
+            <field name="name">Flush Taobao Packet</field>
+            <field name="interval_number">12</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">taobao.packet</field>
+            <field name="function">cron_flush</field>
+            <field name="args">()</field>
+        </record>
+
+    </data>
+</openerp>
