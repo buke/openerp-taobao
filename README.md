@@ -24,23 +24,22 @@ Taobao OpenERP Connector
 5. 自动评价，中差评预警
 
 
-6. .... 等等等 (懒的写了，自己发现吧)
+6. 跟踪淘宝订单物流信息, 签收提醒
 
 
-系统要求:
---------
-
-Openerp 6.1
+7. .... 等等等 (懒的写了，自己发现吧)
 
 
+系统要求：
+------
 
-安装说明：
-----------
+
+OpenERP 6.1
+
+beanstalkd
+
+pycurl
 
 
-1、beanstalkd (windows 用户请搜索 cgywin beanstalkd)
-
-2、安装Taobao OpenERP Connector
-
-3、配置参数
+安装说明等请查看 http://my.oschina.net/wangbuke/blog/67771  
 
