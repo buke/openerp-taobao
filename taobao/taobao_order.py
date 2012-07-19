@@ -292,7 +292,10 @@ class sale_order(osv.osv, TaobaoMixin):
             for line in  sale_order_obj.procurement_lines_get(cr, uid, [sale_id]):
                 wf_service.trg_validate(uid, "procurement.order", line, 'button_confirm', cr)
 
-            pool.get('stock.picking').action_assign(cr, uid, picking_ids)
+            try:
+                pool.get('stock.picking').action_assign(cr, uid, picking_ids)
+            except:  # except_osv: ('Warning !', 'Not enough stock, unable to reserve the products.')
+                pass
 
         cr.commit()
 
