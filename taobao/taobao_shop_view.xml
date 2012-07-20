@@ -3,11 +3,11 @@
     <data>
 
         <!--update mrp scheduler-->
-        <record id="procurement.ir_cron_scheduler_action" model="ir.cron">
-            <field name="interval_number">1</field>
-            <field name="interval_type">hours</field>
-            <field eval="True" name="active"/>
-        </record>
+        <!--<record id="procurement.ir_cron_scheduler_action" model="ir.cron">-->
+            <!--<field name="interval_number">1</field>-->
+            <!--<field name="interval_type">hours</field>-->
+            <!--<field eval="True" name="active"/>-->
+        <!--</record>-->
 
         <!--update Email Queue Manager-->
         <record id="mail.ir_cron_mail_scheduler_action" model="ir.cron">
