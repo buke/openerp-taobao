@@ -84,7 +84,7 @@
 
                 <group colspan="2" col="2" name="uos" groups="product.group_uos" position="after">
                     <separator colspan="4" string="Taobao Product"/>
-                    <field name="taobao_product_ids" mode="form,tree" colspan="4" nolabel='1'/>
+                    <field name="taobao_product_ids" mode="tree,form" colspan="4" nolabel='1'/>
                 </group>
             </field>
         </record>
