@@ -66,7 +66,7 @@
                 <tree string="Taobao Product">
                     <field name="taobao_num_iid" select = "1"/>
                     <field name="taobao_sku_id" select = "1"/>
-                    <field name="sale_shop_id" select = "1"/>
+                    <field name="taobao_shop_id" select = "1"/>
                 </tree>
             </field>
         </record>
@@ -84,7 +84,7 @@
 
                 <group colspan="2" col="2" name="uos" groups="product.group_uos" position="after">
                     <separator colspan="4" string="Taobao Product"/>
-                    <field name="taobao_product_ids" mode="tree"/>
+                    <field name="taobao_product_ids" mode="form,tree" colspan="4" nolabel='1'/>
                 </group>
             </field>
         </record>
