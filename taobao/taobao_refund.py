@@ -70,7 +70,6 @@ class taobao_refund(osv.osv, TaobaoMixin):
         else:
             return None
 
-    #@lock()
     def refund_ticket_new(self, cr, uid, shop, top, refund_id, remind_user = True):
         refund = self._top_refund_get(top, refund_id)
         if refund.seller_nick != shop.taobao_nick: return

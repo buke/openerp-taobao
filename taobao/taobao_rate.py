@@ -95,7 +95,6 @@ class taobao_rate(osv.osv, TaobaoMixin):
         for order in trade_fullinfo.orders.order:
             top('taobao.traderate.add', tid = tid, oid = order.oid, result = result, role = role, content = content, anony = anony )
 
-    #@lock()
     def rate_ticket_new(self, cr, uid, shop, top, rate, remind_user = True):
         res_partner_obj = self.pool.get('res.partner')
         partner = res_partner_obj._get(cr, uid, args = [('taobao_nick','=',rate.nick)])

@@ -29,6 +29,7 @@ import time
 import netsvc
 from .taobao_top import TOP
 import openerp
+from openerp.osv.osv import except_osv
 from taobao_base import TaobaoMixin
 from taobao_base import mq_client
 from taobao_base import msg_route
@@ -143,7 +144,6 @@ class sale_order(osv.osv, TaobaoMixin):
         else:
             return None
 
-    #@lock()
     def _taobao_save_fullinfo(self, pool, cr, uid, taobao_trade_id, shop, top, context=None):
         trade_fullinfo = self._top_trade_fullinfo_get(top, taobao_trade_id)
         if trade_fullinfo.get('seller_nick', None) != shop.taobao_nick:
@@ -211,8 +211,6 @@ class sale_order(osv.osv, TaobaoMixin):
         if context and context.get('order_state', None):
             vals['state'] = context.get('order_state', None)
         vals['pricelist_id'] = shop.sale_shop_id.pricelist_id.id
-        vals['picking_policy'] = 'direct'
-        vals['order_policy'] = 'manual'
         vals['partner_id'] = partner.id
         vals['partner_invoice_id'] = partner_address.id
         vals['partner_order_id'] = partner_address.id
@@ -244,7 +242,6 @@ class sale_order(osv.osv, TaobaoMixin):
             order['sku_id'] = order.get('sku_id', None)
             vals['product_id'] = product.id
             vals['name'] = '[%s] %s' % (product.default_code, product.name)
-            vals['type'] = 'make_to_order'
             vals['taobao_order_id'] = order.oid
             vals['product_uom_qty'] = int(order.num)
             vals['price_unit'] = float(order.total_fee) / float(order.num)
@@ -275,7 +272,6 @@ class sale_order(osv.osv, TaobaoMixin):
 
         return sale_order_instance
 
-    #@lock()
     def _taobao_confirm_order(self, pool, cr, uid, ids):
         #confirm order
         for sale_id in ids:
@@ -292,14 +288,18 @@ class sale_order(osv.osv, TaobaoMixin):
             for line in  sale_order_obj.procurement_lines_get(cr, uid, [sale_id]):
                 wf_service.trg_validate(uid, "procurement.order", line, 'button_confirm', cr)
 
+            picking_obj = pool.get('stock.picking')
             try:
-                pool.get('stock.picking').action_assign(cr, uid, picking_ids)
-            except:  # except_osv: ('Warning !', 'Not enough stock, unable to reserve the products.')
-                pass
+                picking_obj.action_assign(cr, uid, picking_ids)
+            except except_osv: #('Warning !', 'Not enough stock, unable to reserve the products.')
+                picking_obj.force_assign(cr, uid, picking_ids)
+            except:
+                import traceback
+                exc = traceback.format_exc()
+                _logger.error(exc)
 
         cr.commit()
 
-    #@lock()
     def _taobao_cancel_order(self, pool, cr, uid, ids):
         for sale_id in ids:
             wf_service = netsvc.LocalService("workflow")
@@ -317,12 +317,10 @@ class sale_order(osv.osv, TaobaoMixin):
 
         cr.commit()
 
-    #@lock()
     def _taobao_reopen_order(self, pool, cr, uid, ids):
         self._save(cr, uid, ids = ids, **{'state':'draft'})
         cr.commit()
 
-    #@lock()
     def _taobao_order_ship(self, pool, cr, uid, ids, top):
         for sale_id in ids:
             wf_service = netsvc.LocalService("workflow")
@@ -330,8 +328,6 @@ class sale_order(osv.osv, TaobaoMixin):
             if (not sale_order_instance) or int(sale_order_instance.picked_rate) == 100: continue
             picking_obj = pool.get('stock.picking')
             picking_ids = map(lambda x: x.id, sale_order_instance.picking_ids)
-
-            picking_obj.force_assign(cr, uid, picking_ids)
 
             for picking_id in picking_ids:
                 context = dict({'date':time.strftime('%Y-%m-%d')}, active_ids=picking_ids, active_model='stock.picking')
@@ -365,7 +361,6 @@ class sale_order(osv.osv, TaobaoMixin):
 
         cr.commit()
 
-    #@lock()
     def _taobao_create_invoice(self, pool, cr, uid, ids):
         for sale_id in ids:
             wf_service = netsvc.LocalService("workflow")
@@ -387,7 +382,6 @@ class sale_order(osv.osv, TaobaoMixin):
         except:
             return None
 
-    #@lock()
     def _taobao_pay_invoice(self, pool, cr, uid, shop, ids):
         for sale_id in ids:
             sale_order_instance = self.browse(cr, uid, sale_id)
