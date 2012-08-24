@@ -67,7 +67,8 @@ class res_partner(osv.osv, TaobaoMixin):
             'taobao_receive_email_remind': fields.boolean(u'接收邮件提醒'),
             }
 
-    _sql_constraints = [('taobao_user_id_uniq','unique(taobao_user_id)', 'Taobao User must be unique!')]
+    #_sql_constraints = [('taobao_user_id_uniq','unique(taobao_user_id)', 'Taobao User must be unique!')]
+    _sql_constraints = [('taobao_nick_uniq','unique(taobao_nick)', 'Taobao Nick must be unique!')]
 
     _defaults = {
             'taobao_receive_sms_remind': True,

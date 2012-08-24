@@ -24,7 +24,7 @@
 #    突以英文内容为准。
 ##############################################################################
 
-from osv import fields
+from osv import fields, osv
 from osv import orm
 import time, datetime
 import openerp.tools as tools
@@ -89,6 +89,12 @@ def mq_server():
             job.delete()
 
         except TOPException:
+            import traceback
+            exc = traceback.format_exc()
+            _logger.error(exc)
+            job.delete()
+
+        except osv.except_osv:
             import traceback
             exc = traceback.format_exc()
             _logger.error(exc)

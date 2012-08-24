@@ -5,6 +5,10 @@ Taobao OpenERP Connector
 
 作者： wangbuke@gmail.com
 
+Update:
+----------
+2012-08-24 淘宝API变化，不能获取user_id
+
 功能:
 ------
 

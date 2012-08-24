@@ -101,7 +101,7 @@ class taobao_rate(osv.osv, TaobaoMixin):
         if not partner:
             tbbuyer = res_partner_obj._top_user_get(top, nick=rate.nick)
             try:
-                partner = res_partner_obj._save(cr, uid, args=[('taobao_user_id','=', tbbuyer.user_id),('taobao_nick','=', tbbuyer.nick), ('ref','=', '%s' % tbbuyer.nick)], **{'name':tbbuyer.nick, 'ref':'%s' % tbbuyer.nick, 'category_id': [shop.taobao_user_category_id.id], 'customer': True, 'taobao_user_id':tbbuyer.user_id, 'taobao_nick':tbbuyer.nick})
+                partner = res_partner_obj._save(cr, uid, args=[('taobao_nick','=', tbbuyer.nick), ('ref','=', '%s' % tbbuyer.nick)], **{'name':tbbuyer.nick, 'ref':'%s' % tbbuyer.nick, 'category_id': [shop.taobao_user_category_id.id], 'customer': True, 'taobao_user_id':tbbuyer.get('user_id', None), 'taobao_nick':tbbuyer.nick})
             except:
                 #IntegrityError: duplicate key value violates unique constraint "res_partner_taobao_user_id_uniq"
                 pass
