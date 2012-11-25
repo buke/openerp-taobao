@@ -15,13 +15,6 @@
 #
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#    For Commercial or OEM, you need to contact the author and/or licensor
-#    and ask for their permission.
-#
-#    本程序基于AGPL协议发布。在遵守本协议的基础上，您可以本程序用于非商业用途。
-#    商业使用及二次开发，您需要联系并得到作者的许可。以上内容如有未尽事宜或冲
-#    突以英文内容为准。
 ##############################################################################
 
 from osv import fields, osv
