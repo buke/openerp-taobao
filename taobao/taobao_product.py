@@ -139,9 +139,9 @@ class taobao_product(osv.osv, TaobaoMixin):
         total_results = 999
         while(total_results > page_no*page_size):
             if search_q:
-                rsp =top('taobao.items.get', q = search_q, nicks = shop.taobao_nick, fields = ['num_iid','title', 'pic_url', 'price', 'volume'], page_no = page_no + 1, page_size = page_size)
+                rsp =top('taobao.items.onsale.get', q = search_q, nicks = shop.taobao_nick, fields = ['num_iid','title', 'pic_url', 'price', 'volume'], page_no = page_no + 1, page_size = page_size)
             else:
-                rsp =top('taobao.items.get', nicks = shop.taobao_nick, fields = ['num_iid','title', 'pic_url', 'price', 'volume'], page_no = page_no + 1, page_size = page_size)
+                rsp =top('taobao.items.onsale.get', nicks = shop.taobao_nick, fields = ['num_iid','title', 'pic_url', 'price', 'volume'], page_no = page_no + 1, page_size = page_size)
             if rsp and rsp.get('items', False): items = items + rsp.Items.Item
             total_results = int(rsp.total_results)
             page_no += 1

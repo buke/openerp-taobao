@@ -46,7 +46,8 @@ class taobao_product_search(osv.osv_memory):
                     'taobao_item_title': item.title,
                     'taobao_item_pic_url': item.pic_url ,
                     'taobao_item_price': float(item.price),
-                    'taobao_item_volume': int(item.volume),
+                    #'taobao_item_volume': int(item.volume),
+                    'taobao_item_volume': 0,
                     })
 
         context['product_import_lines'] = product_import_lines
