@@ -19,6 +19,7 @@
 
 from osv import fields,osv
 from taobao_base import TaobaoMixin
+from .taobao_top import _O, TOPException
 
 class taobao_shop(osv.osv, TaobaoMixin):
     _inherit = "taobao.shop"
@@ -80,10 +81,14 @@ class res_partner(osv.osv, TaobaoMixin):
                 'is_golden_seller', 'vip_info', 'email', 'magazine_subscribe', 'vertical_market',
                 'online_gaming',
                 ]
-        if nick:
-            rsp =top('taobao.user.get', nick=nick, fields=fields)
-        else:
-            rsp =top('taobao.user.get', fields=fields)
+
+        try:
+            if nick:
+                rsp =top('taobao.user.get', nick=nick, fields=fields)
+            else:
+                rsp =top('taobao.user.get', fields=fields)
+        except TOPException:
+            rsp = _O(dict(user = _O(dict(nick = nick))))
 
         if rsp and rsp.has_key('user'):
             top_user = rsp.user
